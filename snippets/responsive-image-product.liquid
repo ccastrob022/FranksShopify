@@ -1,0 +1,29 @@
+{% assign fallback_width = 7000 %}
+{% assign fallback_alt = 'Descripción de la imagen' %}
+{% assign sizes = '100vw' %}
+
+<img
+  alt="{{ image.alt | default: fallback_alt }}"
+  class="image__img"
+  fetchpriority="high"
+  width="{{ image.width }}"
+  height="{{ image.height }}"
+  src="{{ image | image_url: width: fallback_width }}"
+  srcset="
+    {% assign src_set_string = '' %}
+    {% assign src_set_widths = '320, 480, 768, 1024, 1440, 2048, 3072, 4096, 5120, 6144, 7000' | split: ', ' %}
+    {% for width in src_set_widths %}
+      {% assign width = width | plus: 0 %}
+      {% if image.width < width %}
+        {% break %}
+      {% endif %}
+      {% capture src_set_string %}
+        {% if src_set_string != blank %}, {% endif %}
+        {{ image | image_url: width: width }} {{ width }}w
+      {% endcapture %}
+      {% assign src_set_string = src_set_string | append: src_set_string %}
+    {% endfor %}
+    {{ src_set_string }}"
+  sizes="{{ sizes }}"
+  onload="javascript: this.closest('.image').classList.add('loaded')"
+/>

@@ -1,0 +1,13 @@
+body{
+    background: var(gradient-background);
+    background-attachment: fixed;
+    background-image: url(https://cdn.shopify.com/s/files/1/0661/2064/6824/files/thumbnail_image001.web?v=1721152768) !important;
+    background-color: transparent !important;
+    background-position: top left !important;
+    background-size: auto !important;
+} 
+
+body{
+  background: url("https://cdn.shopify.com/s/files/1/0661/2064/6824/files/thumbnail_image001.png?v=1721152768")!important;
+  background-size: cover !important;
+}
